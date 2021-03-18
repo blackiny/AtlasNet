@@ -45,9 +45,9 @@ def read_binvox_coords(f, integer_division=True, dtype=torch.float32):
     idxs = _compute_idxs_v2(vals, counts)
     if not integer_division:
         idxs = idxs.to(dtype)
-    x_idxs = idxs / (size * size)
+    x_idxs = idxs // (size * size)
     zy_idxs = idxs % (size * size)
-    z_idxs = zy_idxs / size
+    z_idxs = zy_idxs // size
     y_idxs = zy_idxs % size
     coords = torch.stack([x_idxs, y_idxs, z_idxs], dim=1)
     return coords.to(dtype)
